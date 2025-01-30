@@ -1,0 +1,49 @@
+﻿@model practice.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<!-- Background Gradient -->
+<div class="container-fluid bg-gradient text-white p-5" style="background: linear-gradient(45deg, #6a11cb, #2575fc);">
+    <div class="container shadow-lg rounded p-5 bg-white">
+        <h2 class="text-center text-primary fw-bold animate__animated animate__fadeIn">Edit Employee</h2>
+
+        @using (Html.BeginForm("Edit", "Employee", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Id) <!-- Hidden field for Id to track which employee is being edited -->
+
+            <div class="form-group mb-4">
+                @Html.LabelFor(model => model.Name, new { @class = "fw-semibold text-info" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control shadow-lg border-info", placeholder = "Enter employee name" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-4">
+                @Html.LabelFor(model => model.Sex, new { @class = "fw-semibold text-info" })
+                @Html.DropDownListFor(model => model.Sex, new SelectList(new[] { "Male", "Female", "Other" }), "Select", new { @class = "form-control shadow-lg border-info" })
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-4">
+                @Html.LabelFor(model => model.Age, new { @class = "fw-semibold text-info" })
+                @Html.TextBoxFor(model => model.Age, new { @class = "form-control shadow-lg border-info", type = "number", placeholder = "Enter age" })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-4">
+                @Html.LabelFor(model => model.PhoneNo, new { @class = "fw-semibold text-info" })
+                @Html.TextBoxFor(model => model.PhoneNo, new { @class = "form-control shadow-lg border-info", placeholder = "Enter phone number" })
+                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success btn-lg shadow-lg animate__animated animate__pulse animate__infinite">Save Changes</button>
+                <a href="@Url.Action("List", "Employee")" class="btn btn-secondary btn-lg shadow-lg animate__animated animate__bounceIn">Cancel</a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Add Animate.css for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

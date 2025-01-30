@@ -1,0 +1,64 @@
+﻿@model IEnumerable<practice.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold animate__animated animate__fadeIn">Employee List</h2>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover shadow-lg rounded">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Age</th>
+                    <th>Phone No</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var employee in Model)
+                    {
+                        <tr class="animate__animated animate__fadeInUp">
+                            <td>@employee.Name</td>
+                            <td>@employee.Sex</td>
+                            <td>@employee.Age</td>
+                            <td>@employee.PhoneNo</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Employee", new { id = employee.Id })"
+                                   class="btn btn-warning btn-sm animate__animated animate__pulse animate__infinite">
+                                    ✏ Edit
+                                </a> |
+                                <a href="@Url.Action("Delete", "Employee", new { id = employee.Id })"
+                                   class="btn btn-danger btn-sm animate__animated animate__shakeX"
+                                   onclick="return confirm('Are you sure you want to delete this employee?');">
+                                    🗑 Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-danger fw-semibold">No employees found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Create", "Employee")" class="btn btn-success btn-lg shadow-lg
+                  animate__animated animate__bounce animate__infinite">
+            ➕ Create New Employee
+        </a>
+    </div>
+</div>
+
+<!-- Add Animate.css for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

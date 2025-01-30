@@ -1,0 +1,45 @@
+﻿@model practice.Models.Employee
+
+@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold animate__animated animate__fadeIn">Create Employee</h2>
+
+    @using (Html.BeginForm("Create", "Employee", FormMethod.Post))
+    {
+        <div class="form-group mb-4">
+            @Html.LabelFor(m => m.Name, new { @class = "fw-semibold text-info" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control shadow-lg border-info", placeholder = "Enter employee name" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-4">
+            @Html.LabelFor(m => m.Sex, new { @class = "fw-semibold text-info" })
+            @Html.DropDownListFor(m => m.Sex, new SelectList(new[] { "Male", "Female", "Other" }), "Select", new { @class = "form-control shadow-lg border-info" })
+            @Html.ValidationMessageFor(m => m.Sex, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-4">
+            @Html.LabelFor(m => m.Age, new { @class = "fw-semibold text-info" })
+            @Html.TextBoxFor(m => m.Age, new { @class = "form-control shadow-lg border-info", type = "number", placeholder = "Enter age" })
+            @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-4">
+            @Html.LabelFor(m => m.PhoneNo, new { @class = "fw-semibold text-info" })
+            @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control shadow-lg border-info", placeholder = "Enter phone number" })
+            @Html.ValidationMessageFor(m => m.PhoneNo, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg shadow-lg animate__animated animate__pulse animate__infinite">Submit</button>
+    }
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("List", "Employee")" class="btn btn-secondary btn-lg shadow-lg animate__animated animate__bounceInUp">View Employees</a>
+    </div>
+</div>
+
+<!-- Add Animate.css for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
